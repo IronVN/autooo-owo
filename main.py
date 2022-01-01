@@ -2,25 +2,20 @@ from json.decoder import JSONDecodeError
 import discum_c844aef
 import time
 import multiprocessing
-import json
 import random
 import re
 import os
 from functools import cache
 
 from discum_c844aef.discum import Client
-if os.name == 'linux':
+if os.name == 'posix':
   import simplejson as json
 if os.name == 'nt':
-  input("Your os is Windows right? (YES/NO): ")
-  if input == 'YES':
-    pass
-  if input == 'NO':
-    import simplejson as json
-    import json
-else:
-  import simplejson as json
   import json
+if not os.name == 'nt' and 'posix':
+  print("Your OS System Is Not Supported! We Sorry...")
+  time.sleep(2)
+  exit()
  
 print("""\
 ░█████╗░░██╗░░░░░░░██╗░█████╗░  ░██████╗███████╗██╗░░░░░███████╗  ██████╗░░█████╗░████████╗
@@ -38,51 +33,6 @@ once=False
 wbm=[12,16]
 update = 0
 class bot:
-  owoid=408785106942164992#user id of the owo bot
-  with open('settings.json', "r") as file:
-      data = json.load(file)
-      token = data["token"]
-      channel = data["channel"]
-      channel2 = data["owodmid"]
-      proxy = data["proxy"]
-      proxyserver = data["proxy_"]["server"]
-      proxyport = data["proxy_"]["port"]
-  print('=========================')
-  print('|                       |')
-  print('| [1] Load data         |')
-  print('| [2] Create new data   |')
-  print('|                       |')
-  print('========================')
-  time.sleep(2)
-  input("Select option: ")
-  if input == '1':
-    pass
-  if input == '2':
-   with open('settings.json', "w") as file:
-     temp={}
-     temp["token"] = input("please enter your token for once: ")
-     temp["channel"] = input("please enter the id of the channel: ")
-     temp["owodmid"] = input("please enter the id of the owo dms channel(leave empty if you don't want to use it): ")
-     if temp["owodmid"].upper() == " ":
-        pass
-     while True:
-        temp["proxy"] = input("will you use proxy? [YES/NO]")
-        temp["proxy_"] = {}
-        if temp["proxy"].upper() == "YES":
-          temp["proxy_"]["server"] = input("Proxy server: ")
-          temp["proxy_"]["port"] = input("Proxy server port: ")
-          break
-        if temp["proxy"].upper() == "NO":
-          temp["proxy_"]["server"] = None
-          temp["proxy_"]["port"] = None
-          break
-     json.dump(temp, file)
-     token = temp["token"]
-     channel = temp["channel"]
-     channel2 = temp["owodmid"]
-     proxy = temp["proxy"]
-     proxyserver = temp["proxy_"]["server"]
-     proxyport = temp["proxy_"]["port"]
   commands=[
     "owo hunt",
     "owo hunt",
@@ -108,6 +58,28 @@ class bot:
       reset = ''
       bold = ''
       underline = ''
+  owoid=408785106942164992
+  with open('settings.json', "r") as file:
+        data = json.load(file)
+        token = data["token"]
+        channel = data["channel"]
+        channel2 = data["owodmid"]
+        proxy = data["proxy"]
+        proxyserver = data["proxy_"]["server"]
+        proxyport = data["proxy_"]["port"]
+  print('=========================')
+  print('|                       |')
+  print('| [1] Load data         |')
+  print('| [2] Create new data   |')
+  print('|                       |')
+  print('========================')
+  time.sleep(1)
+  time.sleep(1)
+choice = int(input('Enter your choice: '))
+if (choice == 1):
+      pass
+if (choice == 2):
+      os.system('py newdata.py')
 @cache
 def at():
   return f'\033[0;43m{time.strftime("%d %b %Y %H:%M:%S", time.localtime())}\033[0;21m'
@@ -157,6 +129,8 @@ def issuechecker():
           return "exit"
       if 'Please DM me with only the following' in msgonec:
           return "exit"
+      if 'Please reply with the following 4 letter word so I can check!' in msgonec:
+          return "exit"
       if not owodes:
           return "exit"
  except TypeError:
@@ -186,7 +160,7 @@ def issuechecker2():
   except JSONDecodeError:
     if os.name == 'nt':
       pass
-    if os.name == 'Linux':
+    if os.name == 'posix':
       pass
     else:
       input("There is an error while running, do you want to ignore and continue? (YES/NO): ")
