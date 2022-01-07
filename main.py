@@ -12,7 +12,7 @@ if os.name == 'posix':
   import simplejson as json
 if os.name == 'nt':
   import json
-if not os.name == 'nt' and 'posix':
+else:
   print("Your OS System Is Not Supported! We Sorry...")
   time.sleep(2)
   exit()
