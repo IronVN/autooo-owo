@@ -1,8 +1,7 @@
 {
-    "token": "def",
-    "channel": "def",
-    "owodmid": "def",
-    "proxy": " def ",
+    "token": "nothing",
+    "channel": "nothing",
+    "proxy": "NO",
     "proxy_": {
         "server": null,
         "port": null
