@@ -1,3 +1,4 @@
+import time
 import json
 import os
 if os.name == 'nt':
@@ -13,7 +14,6 @@ with open('settings.json', 'r+') as f:
     data = json.load(f)
     data['token'] = input("Please Enter Your Account Token: ")
     data['channel'] = input("Please Enter Your Channel ID: ")
-    data['owodmid'] = input("Please Enter Your OwO's DMs Channel ID: ")
     while True:
         data["proxy"] = input("Will You Use Proxy? [YES/NO]")
         data["proxy_"] = {}
@@ -28,3 +28,6 @@ with open('settings.json', 'r+') as f:
     f.seek(0)        # <--- should reset file position to the beginning.
     json.dump(data, f, indent=4)
     f.truncate()     # remove remaining part
+    print('Successfully saved!')
+    time.sleep(2)
+    exit()
