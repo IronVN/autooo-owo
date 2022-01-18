@@ -1,7 +1,13 @@
-Current version: 1.0.9
+Current version: 1.1.0
 
--Now visible version on the menu.
--Change the version.txt file a bit (delete the Lastest version information because it's too useless)
--Now the option 2 (create new data) and load data is work perfectly fine
--Error not fixed in this version yet because *for some reason i don't see any error while running* 
--Change the settings.json format so no json decode error? idk maybe yes
+-Fixed stop if captcha is asked a lot (idk if it's still broken)
+-Added Credit option, if you choose it then it will show up credit of this repository.
+-Added automatically download package if you not download it yet.
+-Added automatically create newdata for you if you not enter the information yet (so you don't need to turn off and choose option 2 anymore... yay?)
+-Removed issuechecker2 and check if there any captcha in DMs because those are useless.
+-It will return an understandable error description for now if you choose wrong option number (1,2,3) in the menu.
+-It will automatically save and close after you create newdata for now (nvm ignore this).
+-TypeError: String indices must be intenger error is no longer exist (Yea fixed).
+-Int error andJson decode error still here for some reason, Jsondecode error is maybe because your PC (I figured out how to solve Int error but later).
+
+Note: The code will use gateway (response) to run now so it's better than the old one. Maybe...
