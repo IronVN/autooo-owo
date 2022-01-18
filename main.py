@@ -1,22 +1,20 @@
 from json.decoder import JSONDecodeError
-import discum_c844aef
 import time
+import os
 import multiprocessing
 import random
 import re
-import os
-from functools import cache
-
-from discum_c844aef.discum import Client
 if os.name == 'posix':
   import simplejson as json
 if os.name == 'nt':
   import json
-if os.name != 'nt' and 'posix':
-  print("Your OS System Is Not Supported! We Sorry...")
-  time.sleep(2)
-  exit()
- 
+try:
+ import discum
+except:
+ os.system('py -m pip install random_user_agent')
+ os.system('py -m pip install requests')
+ os.system('py -m pip install discum')
+ import discum
 print("""\
 ░█████╗░░██╗░░░░░░░██╗░█████╗░  ░██████╗███████╗██╗░░░░░███████╗  ██████╗░░█████╗░████████╗
 ██╔══██╗░██║░░██╗░░██║██╔══██╗  ██╔════╝██╔════╝██║░░░░░██╔════╝  ██╔══██╗██╔══██╗╚══██╔══╝
@@ -25,7 +23,7 @@ print("""\
 ╚█████╔╝░░╚██╔╝░╚██╔╝░╚█████╔╝  ██████╔╝███████╗███████╗██║░░░░░  ██████╦╝╚█████╔╝░░░██║░░░
 ░╚════╝░░░░╚═╝░░░╚═╝░░░╚════╝░  ╚═════╝░╚══════╝╚══════╝╚═╝░░░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
 
-**Version: 1.0.9**""")
+**Version: 1.1.0**""")
 time.sleep(2)
 try:
   from tkinter import messagebox
@@ -35,7 +33,7 @@ except:
 once=False
 wbm=[12,16]
 update = 0
-class bot:
+class client:
   commands=[
     "owo hunt",
     "owo hunt",
@@ -61,21 +59,21 @@ class bot:
       reset = ''
       bold = ''
       underline = ''
-  owoid=408785106942164992
   with open('settings.json', "r") as file:
         data = json.load(file)
         token = data["token"]
         channel = data["channel"]
-        channel2 = data["owodmid"]
         proxy = data["proxy"]
-        proxyserver = data["proxy_"]["server"]
-        proxyport = data["proxy_"]["port"]
+  if data["token"] and data["channel"] == 'nothing':
+   print(f"{color.fail} !!! [ERROR] !!! {color.reset} Please Enter Information To Continue")
+   time.sleep(1)
+   os.system('py newdata.py')
   print('=========================')
   print('|                       |')
   print('| [1] Load data         |')
   print('| [2] Create new data   |')
-  print('|                       |')
-  print('========================')
+  print('| [3] Credit            |')
+  print('=========================')
   time.sleep(1)
   time.sleep(1)
 choice = int(input('Enter your choice: '))
@@ -83,154 +81,92 @@ if (choice == 1):
       pass
 if (choice == 2):
       os.system('py newdata.py')
-@cache
+if (choice == 3):
+      print(f'{client.color.okcyan} =========Credit=========={client.color.reset}')
+      print(f'{client.color.purple} [Developer] {client.color.reset} Nizel')
+      print(f'{client.color.purple} [Contributor] {client.color.reset} ahihiyou20')
+      print(f'{client.color.okcyan} Most update made by ahihiyou20 for some reason idk {client.color.reset}')
+      time.sleep(5)
+      exit() 
+else: 
+ print(f'{client.color.fail} !! [ERROR] !! {client.color.reset} Wrong input!')
+ time.sleep(2)
+ exit()
 def at():
   return f'\033[0;43m{time.strftime("%d %b %Y %H:%M:%S", time.localtime())}\033[0;21m'
-def report_error(content):
-  if use_terminal:
-    print(at(), content)
-  else:
-    messagebox.showerror("OWO Auto Farm", content)
-client=discum_c844aef.Client(token=bot.token,proxy_host=bot.proxyserver, proxy_port=bot.proxyport, log=False)
-def issuechecker():
- try:
-   msgs=client.getMessages(str(bot.channel),num=10)
-   msgs=json.loads(msgs.text)
-   owodes=0 
-   for msgone in msgs:
-    if msgone['author']['id']==str(bot.owoid):
-      owodes=owodes+1
-      msgonec=msgone['content']
-      if "DM me with only" in msgonec:
-          return "exit"
-      if "(2/5)" in str(msgonec):
-          return "exit"
-      if "(3/5)" in str(msgonec):
-          return "exit"
-      if "(4/5)" in str(msgonec):
-          return "exit"
-      if "(5/5)" in str(msgonec):
-          return "exit"
-      if 'banned' in msgonec:
-          print(f'{at()}{bot.color.fail} !!! [BANNED] !!! {bot.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
-          return "exit"
-      if 'complete your captcha' in msgonec:
-          print(f'{at()}{bot.color.warning} !! [CAPTCHA] !! {bot.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
-          return "exit"
-      if 'If you have trouble solving the captcha, please ask us in our support guild!' in msgonec:
-          print(f'{at()}{bot.color.warning} !! [CAPTCHA] !! {bot.color.reset} CAPTCHA   ACTION REQUİRED')
-          return "exit"
-      if 'captcha' in msgonec:
-          return "exit"
-      if 'Beep Boop.' in msgonec:
-          return "exit"
-      if 'verify that you are human!' in msgonec:
-          return "exit"
-      if 'to check that you are a human!' in msgonec:
-          return "exit"
-      if '⚠️' in msgonec:
-          return "exit"
-      if 'Please DM me with only the following' in msgonec:
-          return "exit"
-      if 'Please reply with the following 4 letter word so I can check!' in msgonec:
-          return "exit"
-      if not owodes:
-          return "exit"
- except TypeError:
-    pass
-
-def issuechecker2():
-  try:
-      msgs=client.getMessages(str(bot.channel2),num=5)
-      msgs=json.loads(msgs.text)
-      owodes=0
-      for msgone in msgs:
-       if msgone['author']['id']==str(bot.owoid):
-          owodes=owodes+1
-      msgonec=msgone['content']
-      if 'Are you a real human?' in msgonec:
-          return "exit"
-      if 'http://verify.owobot.com' in msgonec:
-          return "exit"
-      if '?' in str(msgonec):
-          return "exit"
-      if not owodes:
-          pass
-      if 'I have verified that you are human! Thank you! :3' in msgonec:
-          return "nocap"
-  except TypeError:
-    pass
-  except JSONDecodeError:
-    if os.name == 'nt':
-      pass
-    if os.name == 'posix':
-      pass
-    else:
-      input("There is an error while running, do you want to ignore and continue? (YES/NO): ")
-      if input == 'YES':
-        pass
-      if input == 'NO':
-        print('\033[31m' + '[Exit] Cancelled')
-        time.sleep(2)
-        exit()
-
-
-def security():
-        if issuechecker() == "exit":
-          client.sendMessage(str(bot.channel), "@here CAPTCHA!")
-          report_error("Ban-security triggered, answer the captcha") 
-          exit()
-        if issuechecker2() == "exit":
-          client.sendMessage(str(bot.channel), "@here CAPTCHA!")
-          report_error("Ban-security triggered, found captcha in DMs")
-          exit()
-        if issuechecker2() == "nocap":
-          client.sendMessage(str(bot.channel2), "Ahh yes no captcha, have a nice day!")
-          pass
-
-
-def runner():
+bot = discum.Client(token=client.token,proxy= client.proxy, log=False)
+@bot.gateway.command
+def on_ready(resp):
+    if resp.event.ready_supplemental: #ready_supplemental is sent after ready
+        user = bot.gateway.session.user
+        print("Logged in as {}#{}".format(user['username'], user['discriminator']))
+@bot.gateway.command
+def issuechecker(resp):
+ if resp.event.ready:
+   m = resp.parsed.auto()
+   if m['author']['id'] == '408785106942164992':
+    if 'captcha' in m['content']:
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
+     time.sleep(99999)
+    if '(2/5)' in m['content']:
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
+     time.sleep(99999)
+    if '(3/5)' in m['content']:
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
+     time.sleep(99999)
+    if '(4/5)' in m['content']:
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
+     time.sleep(99999)
+    if '(5/5)' in m['content']:
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
+     time.sleep(99999)
+    if 'banned' in m['content']:
+     print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
+     time.sleep(99999)
+@bot.gateway.command
+def runner(resp):
+  if resp.event.ready:
         global wbm
         owodes=0
-        command=random.choice(bot.commands)
-        command2=random.choice(bot.commands)
-        client.typingAction(str(bot.channel))
-        client.sendMessage(str(bot.channel), command)
-        print(f"{at()}{bot.color.okgreen} [SENT] {bot.color.reset} {command}")
-        if issuechecker2() == "nocap":
-          client.sendMessage(str(bot.channel), "owo hunt")
-          if not owodes:
-            exit()
+        command=random.choice(client.commands)
+        command2=random.choice(client.commands)
+        bot.typingAction(str(client.channel))
+        bot.sendMessage(str(client.channel), command)
+        print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} {command}")
         if not command2==command:
-          client.typingAction(str(bot.channel))
+          bot.typingAction(str(client.channel))
           time.sleep(13)
-          client.sendMessage(str(bot.channel), command2)
-          print(f"{at()}{bot.color.okgreen} [SENT] {bot.color.reset} {command2}")
+          bot.sendMessage(str(client.channel), command2)
+          print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} {command2}")
         time.sleep(random.randint(wbm[0],wbm[1]))
-def owopray():
-  client.sendMessage(str(bot.channel), "owo pray")
-  print(f"{at()}{bot.color.okgreen} [SENT] {bot.color.reset} owo pray")
+@bot.gateway.command
+def owopray(resp):
+ if resp.event.ready:
+  bot.sendMessage(str(client.channel), "owo pray")
+  print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo pray")
   time.sleep(13)
-def gems():
-  client.typingAction(str(bot.channel))
+@bot.gateway.command
+def gems(resp):
+ if resp.event.ready:
+  bot.typingAction(str(client.channel))
   time.sleep(5)
-  client.sendMessage(str(bot.channel), "owo inv")
-  print(f"{at()}{bot.color.okgreen} [SENT] {bot.color.reset} owo inv")
+  bot.sendMessage(str(client.channel), "owo inv")
+  print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo inv")
   time.sleep(7)
-  msgs=client.getMessages(str(bot.channel), num=5)
+  msgs=bot.getMessages(str(client.channel), num=5)
   msgs=json.loads(msgs.text)
   inv = 0
   for msgone in msgs:
-    if msgone['author']['id']==str(bot.owoid) and 'Inventory' in msgone['content']:
+    if msgone['author']['id']==str(408785106942164992) and 'Inventory' in msgone['content']:
       inv=re.findall(r'`(.*?)`', msgone['content'])
   if not inv:
-    security()
+    exit()
   else:
     if '50' in inv:
-      client.sendMessage(str(bot.channel), "owo lb all")
-      print(f"{at()}{bot.color.okgreen} [SENT] {bot.color.reset} owo lb all")
+      bot.sendMessage(str(client.channel), "owo lb all")
+      print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo lb all")
       time.sleep(13)
-      gems()
+      gems(resp)
       return
     for item in inv:
       try: 
@@ -239,7 +175,7 @@ def gems():
       except: #backgounds etc
         inv.pop(inv.index(item))
     tier = [[],[],[]]
-    print(f"{at()}{bot.color.okblue} [INFO] {bot.color.reset} Found {len(inv)} gems Inventory")
+    print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Found {len(inv)} gems Inventory")
     for gem in inv:
       gem =int(gem)
       if 50 < gem < 60:
@@ -250,37 +186,33 @@ def gems():
         tier[2].append(gem)
     for level in range(0,3):
       if not len(tier[level]) == 0:
-        client.sendMessage(str(bot.channel), "owo use "+str(max(tier[level])))
-        print(f"{at()}{bot.color.okgreen} [SENT] {bot.color.reset} owo use {str(max(tier[level]))}")
+        bot.sendMessage(str(client.channel), "owo use "+str(max(tier[level])))
+        print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo use {str(max(tier[level]))}")
         time.sleep(7)
-        
-def loopie():
+@bot.gateway.command
+def loopie(resp):
+ if resp.event.ready:
   x=True
   pray = 0
   gem=pray
   main=time.time()
   while x:
-      runner()
+      runner(resp)
       if time.time() - pray > random.randint(300, 600):
-        security()
-        owopray()
+        owopray(resp)
         pray=time.time()
       if time.time() - gem > random.randint(600, 1000):
-        security()
-        gems()
+        gems(resp)
         gem=time.time()
-      
       if time.time() - main > random.randint(1000, 2000):
         time.sleep(random.randint(300, 600))
-        security ()
         main=time.time()
-@client.gateway.command
-def defination1(resp):
+
+def defination1():
   global once
   if not once:
     once=True
     if __name__ == '__main__':
       lol=multiprocessing.Process(target=loopie)
       lol.run()
-print(bot.token)
-client.gateway.run()
+bot.gateway.run(auto_reconnect=True)
