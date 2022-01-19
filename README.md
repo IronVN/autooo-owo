@@ -1,9 +1,9 @@
 # Cheat for owo
 
 * ### [Download Latest Release](https://github.com/ahihiyou20/discord-selfbot-owo-bot/tags)
-[![GitHub issues](https://img.shields.io/github/issues/sudo-do/discord-selfbot-owo-bot?label=Open%20%C4%B0ssues)](https://github.com/sudo-do/discord-selfbot-owo-bot/issues)
-[![GitHub forks](https://img.shields.io/github/forks/sudo-do/discord-selfbot-owo-bot)](https://github.com/sudo-do/discord-selfbot-owo-bot/network)
-[![GitHub stars](https://img.shields.io/github/stars/sudo-do/discord-selfbot-owo-bot)](https://github.com/sudo-do/discord-selfbot-owo-bot/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/ahihiyou20/discord-selfbot-owo-bot?label=Open%20%C4%B0ssues)](https://github.com/ahihiyou20/discord-selfbot-owo-bot/issues)
+[![GitHub forks](https://img.shields.io/github/forks/ahihiyou20/discord-selfbot-owo-bot)](https://github.com/ahihiyou20/discord-selfbot-owo-bot/network)
+[![GitHub stars](https://img.shields.io/github/stars/ahihiyou20/discord-selfbot-owo-bot)](https://github.com/ahihiyou20/discord-selfbot-owo-bot/stargazers)
 
 
 setup is quite simple you dont have to do anything special just run the file
@@ -20,5 +20,4 @@ also it automatically uses gemsz which is not perfect yet but works perfect
 
 feel free to open issues
 
-**Credit: sudo**
-**Lastest version: Beta 1.0.7**
+**Lastest version: See in version.txt**
