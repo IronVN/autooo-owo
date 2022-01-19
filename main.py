@@ -102,7 +102,7 @@ def on_ready(resp):
         print("Logged in as {}#{}".format(user['username'], user['discriminator']))
 @bot.gateway.command
 def issuechecker(resp):
- if resp.event.ready:
+ if resp.event.message:
    m = resp.parsed.auto()
    if m['author']['id'] == '408785106942164992':
     if 'captcha' in m['content']:
