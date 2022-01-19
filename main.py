@@ -11,7 +11,9 @@ if os.name == 'nt':
 try:
  import discum
 except:
- os.system('py -m pip install -r requirements.txt')
+ os.system('py -m pip install random_user_agent')
+ os.system('py -m pip install requests')
+ os.system('py -m pip install discum')
  import discum
 print("""\
 ░█████╗░░██╗░░░░░░░██╗░█████╗░  ░██████╗███████╗██╗░░░░░███████╗  ██████╗░░█████╗░████████╗
@@ -81,10 +83,12 @@ if (choice == 2):
       os.system('py newdata.py')
 if (choice == 3):
       print(f'{client.color.okcyan} =========Credit=========={client.color.reset}')
-      print(f'{client.color.purple} [Developer] {client.color.reset} ahihiyou20')
+      print(f'{client.color.purple} [Developer] {client.color.reset} Nizel')
+      print(f'{client.color.purple} [Contributor] {client.color.reset} ahihiyou20')
+      print(f'{client.color.okcyan} Most update made by ahihiyou20 for some reason idk {client.color.reset}')
       time.sleep(5)
       exit() 
-else: 
+if not (choice ==1 or 2 or 3): 
  print(f'{client.color.fail} !! [ERROR] !! {client.color.reset} Wrong input!')
  time.sleep(2)
  exit()
