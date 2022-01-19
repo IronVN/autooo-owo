@@ -18,12 +18,11 @@ with open('settings.json', 'r+') as f:
         data["proxy"] = input("Will You Use Proxy? [YES/NO]")
         data["proxy_"] = {}
         if data["proxy"].upper() == "YES":
-          data["proxy_"]["server"] = input("Proxy Server: ")
-          data["proxy_"]["port"] = input("Proxy Server Port: ")
+          data["proxy_"] = input("Proxy: ")
           break
         if data["proxy"].upper() == "NO":
-          data["proxy_"]["server"] = None
-          data["proxy_"]["port"] = None
+          data["proxy_"] = None
+          data["proxy_"] = None
           break
     f.seek(0)        # <--- should reset file position to the beginning.
     json.dump(data, f, indent=4)
