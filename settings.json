@@ -2,8 +2,5 @@
     "token": "nothing",
     "channel": "nothing",
     "proxy": "NO",
-    "proxy_": {
-        "server": null,
-        "port": null
-    }
+    "proxy_": "null"
 }
