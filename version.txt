@@ -8,6 +8,7 @@ Current version: 1.1.0
 -It will return an understandable error description for now if you choose wrong option number (1,2,3) in the menu.
 -It will automatically save and close after you create newdata for now (nvm ignore this).
 -TypeError: String indices must be intenger error is no longer exist (Yea fixed).
--Int error andJson decode error still here for some reason, Jsondecode error is maybe because your PC (I figured out how to solve Int error but later).
-
+-Int error and Json decode error still here for some reason, Jsondecode error is maybe because your PC (I figured out how to solve Int error but later).
+-It will show your account name when you run the selfbot for now instead show up token.
+-Mobile device can run the code using Termux now.
 Note: The code will use gateway (response) to run now so it's better than the old one. Maybe...
