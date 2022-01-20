@@ -11,10 +11,19 @@ if os.name == 'nt':
 try:
  import discum
 except:
- os.system('py -m pip install random_user_agent')
- os.system('py -m pip install requests')
- os.system('py -m pip install discum')
+ if os.name == 'nt':
+  os.system('py -m pip install -r requirements.txt')
+ if os.name != 'nt':
+  os.system('pip install -r requirements.txt')
  import discum
+try:
+  from tkinter import messagebox
+  use_terminal=False
+except:
+  use_terminal=True
+once=False
+wbm=[12,16]
+update = 0
 print("""\
 ░█████╗░░██╗░░░░░░░██╗░█████╗░  ░██████╗███████╗██╗░░░░░███████╗  ██████╗░░█████╗░████████╗
 ██╔══██╗░██║░░██╗░░██║██╔══██╗  ██╔════╝██╔════╝██║░░░░░██╔════╝  ██╔══██╗██╔══██╗╚══██╔══╝
@@ -63,16 +72,16 @@ class client:
         data = json.load(file)
         token = data["token"]
         channel = data["channel"]
-        proxy = data["proxy"]
   if data["token"] and data["channel"] == 'nothing':
    print(f"{color.fail} !!! [ERROR] !!! {color.reset} Please Enter Information To Continue")
    time.sleep(1)
    os.system('py newdata.py')
   print('=========================')
   print('|                       |')
-  print('| [1] Load data         |')
-  print('| [2] Create new data   |')
-  print('| [3] Credit            |')
+  print(f'| [1] {color.purple}Load data         {color.reset}|')
+  print(f'| [2] {color.purple}Create new data   {color.reset}|')
+  print(f'| [3] {color.purple}Credit            {color.reset}|')
+  print(f'| [4] {color.purple}Multiple Account  {color.reset}|')
   print('=========================')
   time.sleep(1)
   time.sleep(1)
@@ -80,21 +89,32 @@ choice = int(input('Enter your choice: '))
 if (choice == 1):
       pass
 if (choice == 2):
+     if os.name == 'nt':
       os.system('py newdata.py')
+     if os.name != 'nt':
+      os.system('python newdata.py')
 if (choice == 3):
       print(f'{client.color.okcyan} =========Credit=========={client.color.reset}')
-      print(f'{client.color.purple} [Developer] {client.color.reset} Nizel')
-      print(f'{client.color.purple} [Contributor] {client.color.reset} ahihiyou20')
-      print(f'{client.color.okcyan} Most update made by ahihiyou20 for some reason idk {client.color.reset}')
+      print(f'{client.color.purple} [Developer] {client.color.reset} ahihiyou20')
+      print(f'{client.color.okcyan} Someone just leave this project :( {client.color.reset}')
       time.sleep(5)
       exit() 
-if not (choice ==1 or 2 or 3): 
+if (choice == 4):
+ print(f'{client.color.purple} COMING SOON! {client.color.reset}')
+ time.sleep(2)
+ exit()
+if not (choice ==1 or 2 or 3 or 4): 
  print(f'{client.color.fail} !! [ERROR] !! {client.color.reset} Wrong input!')
  time.sleep(2)
  exit()
 def at():
   return f'\033[0;43m{time.strftime("%d %b %Y %H:%M:%S", time.localtime())}\033[0;21m'
-bot = discum.Client(token=client.token,proxy= client.proxy, log=False)
+def report_error(content):
+  if use_terminal:
+    pass
+  else:
+    messagebox.showerror("OWO Auto Farm", content)
+bot = discum.Client(token=client.token, log=False)
 @bot.gateway.command
 def on_ready(resp):
     if resp.event.ready_supplemental: #ready_supplemental is sent after ready
@@ -104,25 +124,31 @@ def on_ready(resp):
 def issuechecker(resp):
  if resp.event.message:
    m = resp.parsed.auto()
-   if m['author']['id'] == '408785106942164992':
+   if m['author']['id'] == '408785106942164992': 
     if 'captcha' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
-     time.sleep(99999)
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
+     report_error("Look! I found a captcha!")
+     bot.gateway.close()
     if '(2/5)' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
-     time.sleep(99999)
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (2/5)')
+     report_error("Look! I found a captcha!")
+     bot.gateway.close()
     if '(3/5)' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
-     time.sleep(99999)
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (3/5)')
+     report_error("Look! I found a captcha!")
+     bot.gateway.close()
     if '(4/5)' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
-     time.sleep(99999)
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (4/5)')
+     report_error("Look! I found a captcha!")
+     bot.gateway.close()
     if '(5/5)' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED {msgonec[-6:]}')
-     time.sleep(99999)
+     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (5/5)')
+     report_error("Look! I found a captcha!")
+     bot.gateway.close()
     if 'banned' in m['content']:
      print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
-     time.sleep(99999)
+     report_error("Look! I found a captcha!")
+     bot.gateway.close()
 @bot.gateway.command
 def runner(resp):
   if resp.event.ready:
@@ -160,7 +186,7 @@ def gems(resp):
     if msgone['author']['id']==str(408785106942164992) and 'Inventory' in msgone['content']:
       inv=re.findall(r'`(.*?)`', msgone['content'])
   if not inv:
-    exit()
+    bot.gateway.close()
   else:
     if '50' in inv:
       bot.sendMessage(str(client.channel), "owo lb all")
@@ -201,11 +227,11 @@ def loopie(resp):
       if time.time() - pray > random.randint(300, 600):
         owopray(resp)
         pray=time.time()
-      if time.time() - gem > random.randint(600, 1000):
+      if time.time() - gem > random.randint(800, 1500):
         gems(resp)
         gem=time.time()
       if time.time() - main > random.randint(1000, 2000):
-        time.sleep(random.randint(300, 600))
+        time.sleep(random.randint(500, 700))
         main=time.time()
 
 def defination1():
@@ -213,6 +239,8 @@ def defination1():
   if not once:
     once=True
     if __name__ == '__main__':
+      lol2= Pool(os.cpu_count() - 1)
+      lol2.map(loopie)
       lol=multiprocessing.Process(target=loopie)
       lol.run()
 bot.gateway.run(auto_reconnect=True)
