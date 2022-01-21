@@ -1,8 +1,5 @@
-Current version: 1.1.1
+Current version: 1.1.2
 
--Stop if captcha is asked is working perfectly fine now.
--Removed proxy because almost no one use it and it make the code broken for some reason.
--Added error box from tkinter again, Just like 1.0.4 (I removed it for some reason idk).
--Added a bit color (more beautiful).
--For now it will take 7 CPU from your device (actually [number of cpu you have] - 1) to run so... faster code yay (It won't freeze your pc tho)
--For now it will wait 10~15min to use gems (cuz the old one use too fast bruh).
+-It will stop and print error message if owo is not responding for now.
+-Fixed selfbot stop randomly without any captcha.
+-Fixed gems error. Idk
