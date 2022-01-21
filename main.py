@@ -5,6 +5,10 @@ import multiprocessing
 import random
 import re
 if os.name == 'posix':
+ try:
+  import simplejson as json
+ except:
+  os.system('pip install simplejson')
   import simplejson as json
 if os.name == 'nt':
   import json
@@ -16,14 +20,6 @@ except:
  if os.name != 'nt':
   os.system('pip install -r requirements.txt')
  import discum
-try:
-  from tkinter import messagebox
-  use_terminal=False
-except:
-  use_terminal=True
-once=False
-wbm=[12,16]
-update = 0
 print("""\
 ░█████╗░░██╗░░░░░░░██╗░█████╗░  ░██████╗███████╗██╗░░░░░███████╗  ██████╗░░█████╗░████████╗
 ██╔══██╗░██║░░██╗░░██║██╔══██╗  ██╔════╝██╔════╝██║░░░░░██╔════╝  ██╔══██╗██╔══██╗╚══██╔══╝
@@ -32,16 +28,9 @@ print("""\
 ╚█████╔╝░░╚██╔╝░╚██╔╝░╚█████╔╝  ██████╔╝███████╗███████╗██║░░░░░  ██████╦╝╚█████╔╝░░░██║░░░
 ░╚════╝░░░░╚═╝░░░╚═╝░░░╚════╝░  ╚═════╝░╚══════╝╚══════╝╚═╝░░░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
 
-**Version: 1.1.1**""")
-time.sleep(2)
-try:
-  from tkinter import messagebox
-  use_terminal=False
-except:
-  use_terminal=True
-once=False
+**Version: 1.1.2**""")
 wbm=[12,16]
-update = 0
+time.sleep(2)
 class client:
   commands=[
     "owo hunt",
@@ -75,7 +64,10 @@ class client:
   if data["token"] and data["channel"] == 'nothing':
    print(f"{color.fail} !!! [ERROR] !!! {color.reset} Please Enter Information To Continue")
    time.sleep(1)
-   os.system('py newdata.py')
+   if os.name == 'nt':
+    os.system('py newdata.py')
+   if os.name != 'nt':
+    os.system('python newdata.py')
   print('=========================')
   print('|                       |')
   print(f'| [1] {color.purple}Load data         {color.reset}|')
@@ -109,11 +101,6 @@ if not (choice ==1 or 2 or 3 or 4):
  exit()
 def at():
   return f'\033[0;43m{time.strftime("%d %b %Y %H:%M:%S", time.localtime())}\033[0;21m'
-def report_error(content):
-  if use_terminal:
-    pass
-  else:
-    messagebox.showerror("OWO Auto Farm", content)
 bot = discum.Client(token=client.token, log=False)
 @bot.gateway.command
 def on_ready(resp):
@@ -124,31 +111,26 @@ def on_ready(resp):
 def issuechecker(resp):
  if resp.event.message:
    m = resp.parsed.auto()
-   if m['author']['id'] == '408785106942164992': 
-    if 'captcha' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
-     report_error("Look! I found a captcha!")
-     bot.gateway.close()
-    if '(2/5)' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (2/5)')
-     report_error("Look! I found a captcha!")
-     bot.gateway.close()
-    if '(3/5)' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (3/5)')
-     report_error("Look! I found a captcha!")
-     bot.gateway.close()
-    if '(4/5)' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (4/5)')
-     report_error("Look! I found a captcha!")
-     bot.gateway.close()
-    if '(5/5)' in m['content']:
-     print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (5/5)')
-     report_error("Look! I found a captcha!")
-     bot.gateway.close()
-    if 'banned' in m['content']:
-     print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
-     report_error("Look! I found a captcha!")
-     bot.gateway.close()
+   if m['channel_id'] == client.channel:
+    if m['author']['id'] == '408785106942164992':
+     if 'captcha' in m['content']:
+      print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
+      bot.gateway.close()
+     if '(2/5)' in m['content']:
+      print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (2/5)')
+      bot.gateway.close()
+     if '(3/5)' in m['content']:
+      print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (3/5)')
+      bot.gateway.close()
+     if '(4/5)' in m['content']:
+      print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (4/5)')
+      bot.gateway.close()
+     if '(5/5)' in m['content']:
+      print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (5/5)')
+      bot.gateway.close()
+     if 'banned' in m['content']:
+      print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
+      bot.gateway.close()
 @bot.gateway.command
 def runner(resp):
   if resp.event.ready:
@@ -186,6 +168,7 @@ def gems(resp):
     if msgone['author']['id']==str(408785106942164992) and 'Inventory' in msgone['content']:
       inv=re.findall(r'`(.*?)`', msgone['content'])
   if not inv:
+    print(f'{client.color.fail} [INFO] {client.color.reset}OwO is not responding. Unless you got banned?')
     bot.gateway.close()
   else:
     if '50' in inv:
@@ -203,7 +186,7 @@ def gems(resp):
     tier = [[],[],[]]
     print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Found {len(inv)} gems Inventory")
     for gem in inv:
-      gem =int(gem)
+      gem =int(float(gem))
       if 50 < gem < 60:
         tier[0].append(gem)
       elif 60 < gem < 70:
@@ -227,7 +210,7 @@ def loopie(resp):
       if time.time() - pray > random.randint(300, 600):
         owopray(resp)
         pray=time.time()
-      if time.time() - gem > random.randint(800, 1500):
+      if time.time() - gem > random.randint(900, 1500):
         gems(resp)
         gem=time.time()
       if time.time() - main > random.randint(1000, 2000):
