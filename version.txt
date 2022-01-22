@@ -1,5 +1,4 @@
-Current version: 1.1.2
+Current version: 1.1.3
 
--It will stop and print error message if owo is not responding for now.
--Fixed selfbot stop randomly without any captcha.
--Fixed gems error. Idk
+-Upgrade stop if captcha is asked so it will detect the freaking captcha faster.
+-Int gem error is gone.
