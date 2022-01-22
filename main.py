@@ -225,7 +225,8 @@ def loopie(resp):
         time.sleep(random.randint(500, 700))
         main=time.time()
 
-def defination1():  global once
+def defination1():
+  global once
   if not once:
     once=True
     if __name__ == '__main__':
