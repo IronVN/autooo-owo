@@ -21,4 +21,5 @@ also it automatically uses gemsz which is not perfect yet but works perfect
 feel free to open issues
 
 **Lastest version: See in version.txt**
+
 **Note: This repository is forked from Nizel-sudo-do discord-selfbot-owo-bot repository. I fixed and upgrade his code. So im NOT the owner of this code but at least im still update this repository every week.**
