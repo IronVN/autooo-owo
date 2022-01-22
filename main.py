@@ -1,7 +1,8 @@
 from json.decoder import JSONDecodeError
 import time
 import os
-import multiprocessing
+from multiprocessing import Process
+from multiprocessing import Pool
 import random
 import re
 if os.name == 'posix':
@@ -112,7 +113,7 @@ def issuechecker(resp):
  if resp.event.message:
    m = resp.parsed.auto()
    if m['channel_id'] == client.channel:
-    if m['author']['id'] == '408785106942164992':
+    if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
      if 'captcha' in m['content']:
       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
       bot.gateway.close()
@@ -130,6 +131,12 @@ def issuechecker(resp):
       bot.gateway.close()
      if 'banned' in m['content']:
       print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
+      bot.gateway.close()
+     if 'complete your captcha to verify that you are human!' in m['content']:
+      print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
+      bot.gateway.close()
+     if 'DM' in m['content']:
+      print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
       bot.gateway.close()
 @bot.gateway.command
 def runner(resp):
@@ -186,6 +193,7 @@ def gems(resp):
     tier = [[],[],[]]
     print(f"{at()}{client.color.okblue} [INFO] {client.color.reset} Found {len(inv)} gems Inventory")
     for gem in inv:
+      gem = re.sub(r"[^a-zA-Z0-9]", "", gem)
       gem =int(float(gem))
       if 50 < gem < 60:
         tier[0].append(gem)
@@ -217,8 +225,7 @@ def loopie(resp):
         time.sleep(random.randint(500, 700))
         main=time.time()
 
-def defination1():
-  global once
+def defination1():  global once
   if not once:
     once=True
     if __name__ == '__main__':
