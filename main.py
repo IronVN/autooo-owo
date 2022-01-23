@@ -29,7 +29,7 @@ print("""\
 ╚█████╔╝░░╚██╔╝░╚██╔╝░╚█████╔╝  ██████╔╝███████╗███████╗██║░░░░░  ██████╦╝╚█████╔╝░░░██║░░░
 ░╚════╝░░░░╚═╝░░░╚═╝░░░╚════╝░  ╚═════╝░╚══════╝╚══════╝╚═╝░░░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
 
-**Version: 1.1.3**""")
+**Version: 1.1.4**""")
 wbm=[12,16]
 time.sleep(2)
 class client:
@@ -62,6 +62,8 @@ class client:
         data = json.load(file)
         token = data["token"]
         channel = data["channel"]
+        gm = data["gm"]
+        sm = data["sm"]
   if data["token"] and data["channel"] == 'nothing':
    print(f"{color.fail} !!! [ERROR] !!! {color.reset} Please Enter Information To Continue")
    time.sleep(1)
@@ -116,27 +118,35 @@ def issuechecker(resp):
     if m['author']['id'] == '408785106942164992' or m['author']['username'] == 'OwO' or m['author']['discriminator'] == '8456' or m['author']['public_flags'] == '65536':
      if 'captcha' in m['content']:
       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
+      time.sleep(1)
       bot.gateway.close()
      if '(2/5)' in m['content']:
       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (2/5)')
+      time.sleep(1)
       bot.gateway.close()
      if '(3/5)' in m['content']:
       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (3/5)')
+      time.sleep(1)
       bot.gateway.close()
      if '(4/5)' in m['content']:
       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (4/5)')
+      time.sleep(1)
       bot.gateway.close()
      if '(5/5)' in m['content']:
       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED (5/5)')
+      time.sleep(1)
       bot.gateway.close()
      if 'banned' in m['content']:
       print(f'{at()}{client.color.fail} !!! [BANNED] !!! {client.color.reset} your account have been banned from owo bot please open a issue on the Support Discord server')
+      time.sleep(1)
       bot.gateway.close()
      if 'complete your captcha to verify that you are human!' in m['content']:
       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
+      time.sleep(1)
       bot.gateway.close()
      if 'DM' in m['content']:
       print(f'{at()}{client.color.warning} !! [CAPTCHA] !! {client.color.reset} CAPTCHA   ACTION REQUİRED')
+      time.sleep(1)
       bot.gateway.close()
 @bot.gateway.command
 def runner(resp):
@@ -162,23 +172,24 @@ def owopray(resp):
   time.sleep(13)
 @bot.gateway.command
 def gems(resp):
- if resp.event.ready:
-  bot.typingAction(str(client.channel))
-  time.sleep(5)
-  bot.sendMessage(str(client.channel), "owo inv")
-  print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo inv")
-  time.sleep(7)
-  msgs=bot.getMessages(str(client.channel), num=5)
-  msgs=json.loads(msgs.text)
-  inv = 0
-  for msgone in msgs:
+ if client.gm == 'True':
+  if resp.event.ready:
+   bot.typingAction(str(client.channel))
+   time.sleep(5)
+   bot.sendMessage(str(client.channel), "owo inv")
+   print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo inv")
+   time.sleep(7)
+   msgs=bot.getMessages(str(client.channel), num=5)
+   msgs=json.loads(msgs.text)
+   inv = 0
+   for msgone in msgs:
     if msgone['author']['id']==str(408785106942164992) and 'Inventory' in msgone['content']:
       inv=re.findall(r'`(.*?)`', msgone['content'])
-  if not inv:
-    print(f'{client.color.fail} [INFO] {client.color.reset}OwO is not responding. Unless you got banned?')
-    bot.gateway.close()
-  else:
-    if '50' in inv:
+    if not inv:
+     print(f'{client.color.fail} [INFO] {client.color.reset}OwO is not responding. Unless you got banned?')
+     bot.gateway.close()
+    else:
+     if '50' in inv:
       bot.sendMessage(str(client.channel), "owo lb all")
       print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo lb all")
       time.sleep(13)
@@ -206,6 +217,8 @@ def gems(resp):
         bot.sendMessage(str(client.channel), "owo use "+str(max(tier[level])))
         print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo use {str(max(tier[level]))}")
         time.sleep(7)
+ if client.gm == 'False':
+  pass
 @bot.gateway.command
 def loopie(resp):
  if resp.event.ready:
@@ -222,8 +235,11 @@ def loopie(resp):
         gems(resp)
         gem=time.time()
       if time.time() - main > random.randint(1000, 2000):
+       if sm == 'True':
         time.sleep(random.randint(500, 700))
         main=time.time()
+       if sm == 'False':
+        pass
 
 def defination1():
   global once
