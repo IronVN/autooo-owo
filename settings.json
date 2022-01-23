@@ -1,4 +1,6 @@
 {
     "token": "nothing",
-    "channel": "nothing"
+    "channel": "nothing",
+    "gm": "True",
+    "sm": "True"
 }
