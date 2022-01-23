@@ -170,10 +170,8 @@ def owopray(resp):
   bot.sendMessage(str(client.channel), "owo pray")
   print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo pray")
   time.sleep(13)
-@bot.gateway.command
-def gems(resp):
+def gems():
  if client.gm == 'True':
-  if resp.event.ready:
    bot.typingAction(str(client.channel))
    time.sleep(5)
    bot.sendMessage(str(client.channel), "owo inv")
@@ -193,7 +191,7 @@ def gems(resp):
       bot.sendMessage(str(client.channel), "owo lb all")
       print(f"{at()}{client.color.okgreen} [SENT] {client.color.reset} owo lb all")
       time.sleep(13)
-      gems(resp)
+      gems()
       return
     for item in inv:
       try: 
@@ -232,13 +230,13 @@ def loopie(resp):
         owopray(resp)
         pray=time.time()
       if time.time() - gem > random.randint(900, 1500):
-        gems(resp)
+        gems()
         gem=time.time()
       if time.time() - main > random.randint(1000, 2000):
-       if sm == 'True':
+       if client.sm == 'True':
         time.sleep(random.randint(500, 700))
         main=time.time()
-       if sm == 'False':
+       if client.sm == 'False':
         pass
 
 def defination1():
